@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mirror</string>
+    <string name="exit">Exit app</string>
+    <string name="freeze">Freeze</string>
+</resources>

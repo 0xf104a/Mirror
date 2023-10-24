@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Mirror" parent="Theme.Material3.DayNight">
+    </style>
+    <style name="Widget.Mirror.FloatingActionButton"
+        parent="Widget.Material3.FloatingActionButton.Primary">
+    </style>
+</resources>
