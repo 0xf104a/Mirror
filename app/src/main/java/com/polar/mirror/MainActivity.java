@@ -12,6 +12,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -19,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private PreviewView mCameraView;
-    private boolean mCameraFrozen = false;
+    private FreezeController mFreezeController;
     private final static String TAG = "MainActivity";
 
     @Override
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupView();
 
         mCameraView = findViewById(R.id.preview_view);
+
+        //Initialize freeze controller
+        FloatingActionButton freezeButton = findViewById(R.id.freeze_button);
+        ImageView freezeView = findViewById(R.id.stop_view);
+        mFreezeController = new FreezeController(this, freezeButton, mCameraView,
+                freezeView);
+
+        //Start camera
         try {
             startCamera();
         } catch (ExecutionException | InterruptedException e) {
@@ -94,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .build();
             cameraProvider.unbindAll();
             cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview);
+            mFreezeController.onCameraInitialized(cameraProvider, (LifecycleOwner)this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,13 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Toggles camera freeze mode
      */
     private void toggleCameraFreeze(){
-        if(!mCameraFrozen) {
-            mCameraView.setVisibility(View.GONE);
-            mCameraFrozen = true;
-        } else {
-            mCameraView.setVisibility(View.VISIBLE);
-            mCameraFrozen = false;
-        }
+        mFreezeController.toggleFreeze();
     }
 
     @Override

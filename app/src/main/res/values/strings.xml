@@ -2,4 +2,5 @@
     <string name="app_name">Mirror</string>
     <string name="exit">Exit app</string>
     <string name="freeze">Freeze</string>
+    <string name="stop_view_desc">Image displaying stop-frame</string>
 </resources>
