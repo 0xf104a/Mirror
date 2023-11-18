@@ -53,7 +53,7 @@ public class FreezeController {
      * @param provider camera provider
      * @param lcOwner lifecycle owner used for binding camera usecases
      */
-    public void onCameraInitialized(ProcessCameraProvider provider, LifecycleOwner lcOwner){
+    public void onCameraInitialized(@NonNull ProcessCameraProvider provider, LifecycleOwner lcOwner){
         CameraSelector cameraSelector = new CameraSelector.Builder()
                 .requireLensFacing(CameraSelector.LENS_FACING_FRONT)
                 .build();
@@ -82,8 +82,15 @@ public class FreezeController {
     private Bitmap processFreezeImage(byte[] bytes){
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         Matrix matrix = new Matrix();
+        // Rotate image
         int rotation = getRotationAngleFromOrientation(Utils.getOrientation(mContext));
         matrix.postRotate(rotation);
+        bitmap = Bitmap.createBitmap(
+                bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true
+        );
+        //Mirror image
+        matrix = new Matrix();
+        matrix.preScale(-1.0f, 1.0f);
         bitmap = Bitmap.createBitmap(
                 bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true
         );
