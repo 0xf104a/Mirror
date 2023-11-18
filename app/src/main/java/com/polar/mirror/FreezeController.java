@@ -6,18 +6,16 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Camera;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.media.Image;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.OptIn;
 import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.ImageProxy;
@@ -27,7 +25,6 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
 import java.nio.ByteBuffer;
 
 /**
@@ -35,7 +32,6 @@ import java.nio.ByteBuffer;
  */
 public class FreezeController {
     private static final String TAG = "FreezeController";
-    private final FloatingActionButton mFreezeButton;
     private final PreviewView mCameraView;
     private final ImageView mFreezeView;
     private final ImageCapture mImageCapture;
@@ -44,7 +40,6 @@ public class FreezeController {
 
     FreezeController(Context context, FloatingActionButton freezeButton, PreviewView cameraView,
                      ImageView freezeView){
-        mFreezeButton = freezeButton;
         mCameraView = cameraView;
         mFreezeView = freezeView;
         mContext = context;
@@ -64,6 +59,35 @@ public class FreezeController {
                 .build();
         provider.bindToLifecycle(lcOwner, cameraSelector, mImageCapture);
         Log.d(TAG, "completed onCameraInitialized");
+    }
+
+    private int getRotationAngleFromOrientation(int orientation){
+        int angle = 270;
+        switch (orientation) {
+            case Surface.ROTATION_90:
+                angle = 0;
+                break;
+            case Surface.ROTATION_180:
+                angle = 90;
+                break;
+            case Surface.ROTATION_270:
+                angle = 180;
+                break;
+            default:
+                break;
+        }
+        return angle;
+    }
+
+    private Bitmap processFreezeImage(byte[] bytes){
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        Matrix matrix = new Matrix();
+        int rotation = getRotationAngleFromOrientation(Utils.getOrientation(mContext));
+        matrix.postRotate(rotation);
+        bitmap = Bitmap.createBitmap(
+                bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true
+        );
+        return bitmap;
     }
 
 
@@ -88,12 +112,7 @@ public class FreezeController {
                         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                         byte[] bytes = new byte[buffer.remaining()];
                         buffer.get(bytes);
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                        Matrix matrix = new Matrix();
-                        matrix.postRotate(270);
-                        bitmap = Bitmap.createBitmap(
-                                bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true
-                        );
+                        Bitmap bitmap = processFreezeImage(bytes);
                         mFreezeView.setImageBitmap(bitmap);
                         imageProxy.close();
                     }
