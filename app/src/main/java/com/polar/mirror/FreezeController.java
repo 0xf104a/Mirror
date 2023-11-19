@@ -37,6 +37,7 @@ public class FreezeController {
     private final ImageCapture mImageCapture;
     private final Context mContext;
     private boolean mCameraFrozen = false;
+    private final FloatingActionButton mFreezeButton;
 
     FreezeController(Context context, FloatingActionButton freezeButton, PreviewView cameraView,
                      ImageView freezeView){
@@ -46,6 +47,7 @@ public class FreezeController {
         mImageCapture = new ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 .build();
+        mFreezeButton = freezeButton;
     }
 
     /**
@@ -139,11 +141,13 @@ public class FreezeController {
         if(mCameraFrozen){
             mFreezeView.setVisibility(View.GONE);
             mCameraView.setVisibility(View.VISIBLE);
+            mFreezeButton.setImageResource(android.R.drawable.ic_media_pause);
             mCameraFrozen = false;
         } else {
             setFrozenImage();
             mCameraView.setVisibility(View.GONE);
             mFreezeView.setVisibility(View.VISIBLE);
+            mFreezeButton.setImageResource(android.R.drawable.ic_media_play);
             mCameraFrozen = true;
         }
     }
