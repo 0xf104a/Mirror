@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/action_panel_layout"
@@ -14,25 +13,53 @@
         android:layout_marginBottom="64dp"
         android:visibility="visible">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/exit_button"
-            style="@style/Widget.Mirror.FloatingActionButton"
+        <!-- Wrapper for Exit Button and Label -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:contentDescription="@string/exit"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            android:orientation="vertical"
+            android:layout_margin="16dp">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/freeze_button"
-            style="@style/Widget.Mirror.FloatingActionButton"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/exit_button"
+                style="@style/Widget.Mirror.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/exit"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/exit"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <!-- Wrapper for Freeze Button and Label -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:contentDescription="@string/exit"
-            android:src="@android:drawable/ic_media_pause" />
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/freeze_button"
+                style="@style/Widget.Mirror.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/freeze"
+                android:src="@android:drawable/ic_media_pause" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/freeze"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>
