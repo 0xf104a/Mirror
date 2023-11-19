@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private PreviewView mCameraView;
     private FreezeController mFreezeController;
+    private ActionPanelController mActionPanelController;
     private final static String TAG = "MainActivity";
 
     @Override
@@ -28,9 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupView();
-
+        View panelView = findViewById(R.id.action_panel_layout);
+        View overlayView = findViewById(R.id.overlay_view);
+        mActionPanelController = new ActionPanelController(this, panelView, overlayView);
         mCameraView = findViewById(R.id.preview_view);
+
+        setupView();
 
         //Initialize freeze controller
         FloatingActionButton freezeButton = findViewById(R.id.freeze_button);
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+
+
     }
 
     @Override
@@ -65,6 +71,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         setupFloatingButtons();
         hideSystemUi();
+        setupPanel();
+    }
+
+    /**
+     * Setups logic of action panel in a general
+     */
+    private void setupPanel(){
+        //Setup action panel
+        View stopView = findViewById(R.id.stop_view);
+        mCameraView.setClickable(true);
+        mCameraView.setOnClickListener(mActionPanelController);
+        stopView.setClickable(true);
+        stopView.setOnClickListener(mActionPanelController);
     }
 
     /**

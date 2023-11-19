@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--After how many milliseconds we should hide action panel-->
+    <integer name="autohide_action_panel_ms">15000</integer>
+</resources>

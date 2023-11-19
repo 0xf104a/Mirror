@@ -21,6 +21,7 @@
         android:contentDescription="@string/stop_view_desc" />
 
     <View
+        android:id="@+id/overlay_view"
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:layout_gravity="bottom"
