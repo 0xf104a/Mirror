@@ -3,6 +3,7 @@
     <string name="app_name">Lustro</string>
     <string name="exit">Wyjśсie</string>
     <string name="freeze">Pauza</string>
+    <string name="stop_view_desc">Zdjęcie dla trybu pauzy</string>
     <string name="tap_to_show_actions">Kliknij gdziekolwiek, aby wyświetlić menu akcji</string>
     <string name="can_not_start_camera">Brak dostępu do kamery</string>
     <string name="no_camera_permissions">Dostęp do kamery nie został przyznany. Użyj aplikacji Ustawienia, aby pryznać dostęp</string>
