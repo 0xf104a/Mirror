@@ -6,13 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.Preview;
 import androidx.camera.view.PreviewView;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             startCamera();
         } catch (ExecutionException | InterruptedException e) {
+            final String toastText = getString(R.string.can_not_start_camera);
+            Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 
@@ -121,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .requireLensFacing(CameraSelector.LENS_FACING_FRONT)
                     .build();
             cameraProvider.unbindAll();
-            cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector, preview);
-            mFreezeController.onCameraInitialized(cameraProvider, (LifecycleOwner)this);
+            cameraProvider.bindToLifecycle(this, cameraSelector, preview);
+            mFreezeController.onCameraInitialized(cameraProvider, this);
         } catch (Exception e) {
             e.printStackTrace();
         }

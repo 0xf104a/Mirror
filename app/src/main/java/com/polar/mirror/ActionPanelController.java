@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -21,6 +22,8 @@ public class ActionPanelController implements View.OnClickListener {
     private Handler mHideHandler;
     private Runnable mHideRunnable;
     private final int hideMs;
+    private boolean isFirstTimeHide = true;
+    private final Context mContext;
     public ActionPanelController(Context context, View panelView, View overlayView){
         mPanelView = panelView;
         mOverlayView = overlayView;
@@ -30,6 +33,7 @@ public class ActionPanelController implements View.OnClickListener {
         if(hideMs < 0){
             throw new RuntimeException("Bad configuration: negative hideMs");
         }
+        mContext = context;
         setupAnimations();
         setupAutoHide();
     }
@@ -82,6 +86,11 @@ public class ActionPanelController implements View.OnClickListener {
     }
 
     private void hidePanel(){
+        if(isFirstTimeHide){
+            final String toastText = mContext.getString(R.string.tap_to_show_actions);
+            Toast.makeText(mContext, toastText, Toast.LENGTH_LONG).show();
+            isFirstTimeHide = false;
+        }
         mPanelView.startAnimation(mSlideDownAnimation);
         mOverlayView.startAnimation(mSlideDownAnimation);
         mPanelVisible = false;
