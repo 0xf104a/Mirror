@@ -1,0 +1,16 @@
+O APLIKACJI
+Ta aplikacja pozwala używać telefonu lub tabletu jako kieszonkowego lusterka. Jest open source, darmowa i nie wymaga żadnych dodatkowych uprawnień poza kamerą.
+
+FUNKCJE
+* Tryb pauzy
+* Styl Material 3
+* Wygodny interfejs
+* Utrzymuje ekran włączony
+* Tryb pełnoekranowy
+
+LICENCJA
+Aplikacja jest dostępna na licencji GNU General Public License v3.0.
+
+KOD ŹRÓDŁOWY
+Kod źródłowy aplikacji można znaleźć pod linkiem:
+https://github.com/Andrewerr/Mirror
