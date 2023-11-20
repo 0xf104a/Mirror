@@ -8,7 +8,8 @@ using a camera.
 * Pause stream, so you can better look on some aspects of yourself
 * Material 3 design
 * Convenient GUI
-
+* Keeps screen on
+* Full-screen image
 
 # Getting bleeding-edge version
 If you would like to test new features and fixes as they are developed you may download a bleeding-edge build from [Github Actions](https://github.com/Andrewerr/Mirror/actions). Here is the [instruction](https://docs.github.com/en/actions/managing-workflow-runs/downloading-workflow-artifacts) of how you can do it. 
