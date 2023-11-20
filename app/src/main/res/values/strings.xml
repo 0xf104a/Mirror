@@ -5,4 +5,5 @@
     <string name="stop_view_desc">Image displaying stop-frame</string>
     <string name="tap_to_show_actions">Tap anywhere to show actions again</string>
     <string name="can_not_start_camera">Can not access camera</string>
+    <string name="no_camera_permissions">Camera permissions was not granted. Use Settings app to grant it.</string>
 </resources>

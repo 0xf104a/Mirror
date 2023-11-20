@@ -7,12 +7,17 @@ import androidx.camera.core.CameraSelector;
 import androidx.camera.core.Preview;
 import androidx.camera.view.PreviewView;
 import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.Manifest;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,11 +28,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FreezeController mFreezeController;
     private ActionPanelController mActionPanelController;
     private final static String TAG = "MainActivity";
+    private static final int CAMERA_PERMISSION_CODE = 858;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        requestCameraPermissionIfNeeded();
 
         View panelView = findViewById(R.id.action_panel_layout);
         View overlayView = findViewById(R.id.overlay_view);
@@ -50,8 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
-
     }
 
     @Override
@@ -147,6 +153,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             toggleCameraFreeze();
         } else {
             Log.w(TAG, "Unknown id of view: " + viewId);
+        }
+    }
+
+    public void requestCameraPermissionIfNeeded() {
+        if(Build.VERSION.SDK_INT >= 33) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG, "Camera permission is granted.");
+                return;
+            }
+            Log.d(TAG, "Camera permission is not granted yet, so will request it now");
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (!(grantResults.length > 0) || grantResults[0] != PackageManager.PERMISSION_GRANTED){
+                final String toastText = getString(R.string.no_camera_permissions);
+                Log.d(TAG, "User denied camera permission");
+                Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
