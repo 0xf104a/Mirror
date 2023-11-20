@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Дзеркало</string>
+    <string name="exit">Вихід</string>
+    <string name="freeze">Пауза</string>
+    <string name="stop_view_desc">Стоп-фрейм</string>
+    <string name="tap_to_show_actions">Натиснить будь-де, аби знов показити меню дій</string>
+    <string name="can_not_start_camera">Не вдалося отримати доступ до камери</string>
+    <string name="no_camera_permissions">Доступ до камери не надано. Скористуйтесь застосунком Налаштування, аби надати доступ вручну</string>
+</resources>
