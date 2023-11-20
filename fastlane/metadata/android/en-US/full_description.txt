@@ -1,0 +1,16 @@
+ABOUT
+This application allows you to use your device as a mirror by streaming your frontal camera. It is open-source, free to use and does not require any extra permissions except camera.
+
+FEATURES
+* Pause stream, so you can better look on some aspects of yourself
+* Material 3 design
+* Convenient GUI
+* Keeps screen on
+* Full-screen image
+
+LICENSE
+The app is licensed under GNU General Public License v3.0
+
+REPOSITORY
+The source code of app may be found by link:
+https://github.com/Andrewerr/Mirror
