@@ -8,6 +8,9 @@ FEATURES
 * Keeps screen on
 * Full-screen image
 
+CREDITS
+* App icon: Mirror icons created by prettycons: https://www.flaticon.com/free-icons/mirror
+
 LICENSE
 The app is licensed under GNU General Public License v3.0
 

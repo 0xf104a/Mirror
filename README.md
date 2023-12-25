@@ -14,6 +14,9 @@ using a camera.
 # Getting bleeding-edge version
 If you would like to test new features and fixes as they are developed you may download a bleeding-edge build from [Github Actions](https://github.com/Andrewerr/Mirror/actions). Here is the [instruction](https://docs.github.com/en/actions/managing-workflow-runs/downloading-workflow-artifacts) of how you can do it. 
 
+# Credits
+* App icon: <a href="https://www.flaticon.com/free-icons/mirror" title="mirror icons">Mirror icons created by prettycons - Flaticon</a>
+
 # Donate
 If you like this app please donate:<br>
 [![LiberaPay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Andrewerr/donate)
