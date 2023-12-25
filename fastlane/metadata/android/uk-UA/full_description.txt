@@ -8,8 +8,13 @@
 * Екран завжди увімкнено
 * Працює в режимі повного екрана
 
+
+ПОДЯКИ
+* Іконка застосунку:  Mirror icons created by prettycons: https://www.flaticon.com/free-icons/mirror
+
+
 ЛІЦЕНЗІЯ
-Цей застосунок ліцензовано до GNU General Public License v3.0
+Цей застосунок ліцензовано під ліцензією GNU General Public License v3.0
 
 ПОЧАТКОВИЙ КОД
 Початковий код може бути знайдено за наступним посиланням:

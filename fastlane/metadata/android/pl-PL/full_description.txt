@@ -8,6 +8,9 @@ FUNKCJE
 * Utrzymuje ekran włączony
 * Tryb pełnoekranowy
 
+PODZIĘNKOWANIA
+* Ikona aplikacji: Mirror icons created by prettycons: https://www.flaticon.com/free-icons/mirror 
+
 LICENCJA
 Aplikacja jest dostępna na licencji GNU General Public License v3.0.
 
