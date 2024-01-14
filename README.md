@@ -1,5 +1,7 @@
 <div align="center">
-     
+
+<img src="https://github.com/Andrewerr/Mirror/blob/main/fastlane/images/icon.png" height="200">
+
 # Mirror
 
 ### Simple Android application turning your device into a pocket mirror🪞
