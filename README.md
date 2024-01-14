@@ -1,5 +1,6 @@
 [![Java CI with Gradle](https://github.com/Andrewerr/Mirror/actions/workflows/gradle.yml/badge.svg)](https://github.com/Andrewerr/Mirror/actions/workflows/gradle.yml)
 ![Github tag](https://img.shields.io/github/v/tag/Andrewerr/Mirror?logo=github)
+[![F-Droid build](https://img.shields.io/f-droid/v/com.polar.mirror.svg?logo=f-droid)](https://f-droid.org/wiki/page/com.polar.mirror/lastbuild)
 # About
 This application allows you to use your device as a mirror by streaming your frontal camera. It is open-source, free to use and does not require any extra permissions except 
 using a camera.
