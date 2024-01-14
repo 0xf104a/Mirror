@@ -8,6 +8,7 @@
 
 [![Java CI with Gradle](https://github.com/Andrewerr/Mirror/actions/workflows/gradle.yml/badge.svg)](https://github.com/Andrewerr/Mirror/actions/workflows/gradle.yml)
 ![Github tag](https://img.shields.io/github/v/tag/Andrewerr/Mirror?logo=github)
+[![F-Droid build](https://img.shields.io/f-droid/v/com.polar.mirror.svg?logo=f-droid)](https://f-droid.org/wiki/page/com.polar.mirror/lastbuild)
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
