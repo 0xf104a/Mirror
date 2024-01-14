@@ -4,6 +4,12 @@
 This application allows you to use your device as a mirror by streaming your frontal camera. It is open-source, free to use and does not require any extra permissions except 
 using a camera.
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/com.polar.mirror/)
+
+Or download the latest APK from the [Releases Section](https://github.com/Andrewerr/Mirror/releases/latest).
+
 # Features
 * Pause stream, so you can better look on some aspects of yourself
 * Material 3 design
