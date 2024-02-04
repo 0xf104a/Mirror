@@ -11,7 +11,7 @@
 
 ПОДЯКИ
 * Іконка застосунку:  Mirror icons created by prettycons: https://www.flaticon.com/free-icons/mirror
-
+* @Poussinou та @inson1 за покращення метаданих
 
 ЛІЦЕНЗІЯ
 Цей застосунок ліцензовано під ліцензією GNU General Public License v3.0

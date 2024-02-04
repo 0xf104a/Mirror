@@ -1,0 +1,2 @@
+* Ulepszenie metadanych
+* Naprawiono błędy związane z rotacją ekranu(#3)

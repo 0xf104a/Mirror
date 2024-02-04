@@ -10,6 +10,7 @@ FEATURES
 
 CREDITS
 * App icon: Mirror icons created by prettycons: https://www.flaticon.com/free-icons/mirror
+* @Poussinou and @inson1 for metadata improvements
 
 LICENSE
 The app is licensed under GNU General Public License v3.0

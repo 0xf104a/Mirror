@@ -10,6 +10,7 @@ FUNKCJE
 
 PODZIĘNKOWANIA
 * Ikona aplikacji: Mirror icons created by prettycons: https://www.flaticon.com/free-icons/mirror 
+* @Poussinou i @inson1 za ulepszenie metadanych
 
 LICENCJA
 Aplikacja jest dostępna na licencji GNU General Public License v3.0.

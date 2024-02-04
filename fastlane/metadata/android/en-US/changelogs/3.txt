@@ -1,0 +1,2 @@
+* Metadata improvements
+* Fix some bugs associated with screen rotation(#3)
