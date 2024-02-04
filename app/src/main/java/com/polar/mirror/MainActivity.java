@@ -26,7 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.concurrent.ExecutionException;
 
 class MainActivityData implements Parcelable{
-    public Boolean isPanelVisible = null;
+    public Boolean isPanelVisible;
     public static final String PARCELABLE_NAME = "MainActivityData";
 
     public MainActivityData(boolean _isPanelVisible){
