@@ -1,6 +1,9 @@
 package com.polar.mirror;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -10,6 +13,49 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+class ActionPanelControllerData implements Parcelable{
+    public Boolean isPanelVisible;
+    public Boolean isFirstTimeHide;
+
+    public static final String PARCELABLE_NAME = "ActionPanelControllerData";
+
+    public ActionPanelControllerData(boolean _isPanelVisible, boolean _isFirstTimeHide){
+        isPanelVisible = _isPanelVisible;
+        isFirstTimeHide = _isFirstTimeHide;
+    }
+
+    protected ActionPanelControllerData(Parcel in) {
+        isPanelVisible = in.readInt() != 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        // We use int here to keep our code compatiable with API level < 29
+        if(isPanelVisible){
+            dest.writeInt(1);
+        } else {
+            dest.writeInt(0);
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ActionPanelControllerData> CREATOR =
+            new Creator<ActionPanelControllerData>() {
+        @Override
+        public ActionPanelControllerData createFromParcel(Parcel in) {
+            return new ActionPanelControllerData(in);
+        }
+
+        @Override
+        public ActionPanelControllerData[] newArray(int size) {
+            return new ActionPanelControllerData[size];
+        }
+    };
+}
 
 /**
  * Controls panel with floating action buttons
@@ -129,7 +175,7 @@ public class ActionPanelController implements View.OnClickListener {
      * Hides or shows panel immediately
      * @param isVisible whether panel should be visible
      */
-    public void setPanelVisible(boolean isVisible){
+    private void setPanelVisible(boolean isVisible){
         Log.d(TAG, "setting visibility to " + isVisible);
         mPanelVisible = isVisible;
         if(!isVisible){
@@ -141,11 +187,20 @@ public class ActionPanelController implements View.OnClickListener {
         }
     }
 
-    /**
-     * Checks that action panel is visible
-     * @return true if panel is currently visible
-     */
-    public boolean isPanelVisible(){
-        return mPanelVisible;
+
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(ActionPanelControllerData.PARCELABLE_NAME,
+                new ActionPanelControllerData(mPanelVisible, isFirstTimeHide));
+    }
+
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        ActionPanelControllerData controllerData =
+                savedInstanceState.getParcelable(ActionPanelControllerData.PARCELABLE_NAME);
+        if(controllerData == null){
+            Log.w(TAG, "activityData is null, ignoring restoring instance state");
+            return;
+        }
+        isFirstTimeHide = controllerData.isFirstTimeHide;
+        setPanelVisible(controllerData.isPanelVisible);
     }
 }

@@ -25,45 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.concurrent.ExecutionException;
 
-class MainActivityData implements Parcelable{
-    public Boolean isPanelVisible;
-    public static final String PARCELABLE_NAME = "MainActivityData";
 
-    public MainActivityData(boolean _isPanelVisible){
-        isPanelVisible = _isPanelVisible;
-    }
-
-    protected MainActivityData(Parcel in) {
-        isPanelVisible = in.readInt() != 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        // We use int here to keep our code compatiable with API level < 29
-        if(isPanelVisible){
-            dest.writeInt(1);
-        } else {
-            dest.writeInt(0);
-        }
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<MainActivityData> CREATOR = new Creator<MainActivityData>() {
-        @Override
-        public MainActivityData createFromParcel(Parcel in) {
-            return new MainActivityData(in);
-        }
-
-        @Override
-        public MainActivityData[] newArray(int size) {
-            return new MainActivityData[size];
-        }
-    };
-}
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private PreviewView mCameraView;
@@ -111,20 +73,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(MainActivityData.PARCELABLE_NAME,
-                new MainActivityData(mActionPanelController.isPanelVisible()));
+        mActionPanelController.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        MainActivityData activityData =
-                savedInstanceState.getParcelable(MainActivityData.PARCELABLE_NAME);
-        if(activityData == null){
-            Log.w(TAG, "activityData is null, ignoring restoring instance state");
-            return;
-        }
-        mActionPanelController.setPanelVisible(activityData.isPanelVisible);
+        mActionPanelController.onRestoreInstanceState(savedInstanceState);
     }
 
 
