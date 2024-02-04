@@ -1,6 +1,7 @@
 package com.polar.mirror;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
  * Controls panel with floating action buttons
  */
 public class ActionPanelController implements View.OnClickListener {
+    private final static String TAG = "ActionPanelController";
     private final View mPanelView;
     private final View mOverlayView;
     private final Animation mSlideDownAnimation;
@@ -46,6 +48,10 @@ public class ActionPanelController implements View.OnClickListener {
 
     private void scheduleHide(){
         mHideHandler.postDelayed(mHideRunnable, hideMs);
+    }
+
+    private void cancelHide(){
+        mHideHandler.removeCallbacksAndMessages(null);
     }
 
     private void setupAnimations(){
@@ -117,5 +123,29 @@ public class ActionPanelController implements View.OnClickListener {
         if(viewId == R.id.preview_view || viewId == R.id.stop_view){
             togglePanelVisibility();
         }
+    }
+
+    /**
+     * Hides or shows panel immediately
+     * @param isVisible whether panel should be visible
+     */
+    public void setPanelVisible(boolean isVisible){
+        Log.d(TAG, "setting visibility to " + isVisible);
+        mPanelVisible = isVisible;
+        if(!isVisible){
+            hidePanel();
+            cancelHide(); //Cancel timer, so we would not show useless toasts
+        } else {
+            mPanelView.setVisibility(View.VISIBLE);
+            mOverlayView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * Checks that action panel is visible
+     * @return true if panel is currently visible
+     */
+    public boolean isPanelVisible(){
+        return mPanelVisible;
     }
 }
