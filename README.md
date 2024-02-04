@@ -35,6 +35,8 @@ If you would like to test new features and fixes as they are developed you may d
 
 # Credits
 * App icon: <a href="https://www.flaticon.com/free-icons/mirror" title="mirror icons">Mirror icons created by prettycons - Flaticon</a>
+* [@Poussinou](https://github.com/Poussinou/) for metadata improvements
+* [@inson1](https://github.com/inson1/) for metadata improvements
 
 # Donate
 If you like this app please donate:<br>
