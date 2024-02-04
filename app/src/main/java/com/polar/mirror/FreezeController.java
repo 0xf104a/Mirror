@@ -53,7 +53,7 @@ public class FreezeController {
     /**
      * Should be called when camera is ready
      * @param provider camera provider
-     * @param lcOwner lifecycle owner used for binding camera usecases
+     * @param lcOwner lifecycle owner used for binding camera use-cases
      */
     public void onCameraInitialized(@NonNull ProcessCameraProvider provider, LifecycleOwner lcOwner){
         CameraSelector cameraSelector = new CameraSelector.Builder()

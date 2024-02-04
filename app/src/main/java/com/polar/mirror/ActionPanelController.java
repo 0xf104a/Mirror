@@ -14,8 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 class ActionPanelControllerData implements Parcelable{
-    public Boolean isPanelVisible;
-    public Boolean isFirstTimeHide;
+    public final Boolean isPanelVisible;
+    public final Boolean isFirstTimeHide;
 
     public static final String PARCELABLE_NAME = "ActionPanelControllerData";
 
@@ -31,7 +31,7 @@ class ActionPanelControllerData implements Parcelable{
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        // We use int here to keep our code compatiable with API level < 29
+        // We use int here to keep our code compatible with API level < 29
         if(isPanelVisible){
             dest.writeInt(1);
         } else {
