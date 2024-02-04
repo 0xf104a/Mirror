@@ -26,12 +26,18 @@ class ActionPanelControllerData implements Parcelable{
 
     protected ActionPanelControllerData(Parcel in) {
         isPanelVisible = in.readInt() != 0;
+        isFirstTimeHide = in.readInt() != 0;
     }
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         // We use int here to keep our code compatiable with API level < 29
         if(isPanelVisible){
+            dest.writeInt(1);
+        } else {
+            dest.writeInt(0);
+        }
+        if(isFirstTimeHide){
             dest.writeInt(1);
         } else {
             dest.writeInt(0);
