@@ -28,8 +28,10 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private PreviewView mCameraView;
     private FreezeController mFreezeController;
+    private LowLightController mLowLightController;
     private ActionPanelController mActionPanelController;
     private final static String TAG = "MainActivity";
+    private Preview mPreview = null;
     private static final int CAMERA_PERMISSION_CODE = 858;
 
     @Override
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Start camera
         try {
             startCamera();
+            mLowLightController = new LowLightController(this, mPreview);
         } catch (ExecutionException | InterruptedException e) {
             final String toastText = getString(R.string.can_not_start_camera);
             Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();
@@ -114,10 +117,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setupFloatingButtons(){
         FloatingActionButton exitButton = findViewById(R.id.exit_button);
         FloatingActionButton freezeButton = findViewById(R.id.freeze_button);
+        FloatingActionButton lowLightButton = findViewById(R.id.low_light_button);
         exitButton.setClickable(true);
         exitButton.setOnClickListener(this);
         freezeButton.setClickable(true);
         freezeButton.setOnClickListener(this);
+        lowLightButton.setClickable(true);
+        lowLightButton.setOnClickListener(this);
     }
 
     /**
@@ -135,15 +141,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @throws InterruptedException in case of thread interruption
      */
     private void startCamera() throws ExecutionException, InterruptedException {
-        Preview preview = new Preview.Builder().build();
-        preview.setSurfaceProvider(mCameraView.getSurfaceProvider());
+        mPreview = new Preview.Builder().build();
+        mPreview.setSurfaceProvider(mCameraView.getSurfaceProvider());
         ProcessCameraProvider cameraProvider = ProcessCameraProvider.getInstance(this).get();
         try {
             CameraSelector cameraSelector = new CameraSelector.Builder()
                     .requireLensFacing(CameraSelector.LENS_FACING_FRONT)
                     .build();
             cameraProvider.unbindAll();
-            cameraProvider.bindToLifecycle(this, cameraSelector, preview);
+            cameraProvider.bindToLifecycle(this, cameraSelector, mPreview);
             mFreezeController.onCameraInitialized(cameraProvider, this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,6 +163,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFreezeController.toggleFreeze();
     }
 
+    private void toggleLowLightMode(){
+        if(mLowLightController == null){
+            Log.wtf(TAG, "Low-light mode controller is null");
+            return;
+        }
+        mLowLightController.toggleLowLightMode();
+    }
+
     @Override
     public void onClick(@NonNull View v) {
         int viewId = v.getId();
@@ -165,6 +179,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.finish();
         } else if(viewId == R.id.freeze_button) {
             toggleCameraFreeze();
+        } else if(viewId == R.id.low_light_button){
+            toggleLowLightMode();
         } else {
             Log.w(TAG, "Unknown id of view: " + viewId);
         }
