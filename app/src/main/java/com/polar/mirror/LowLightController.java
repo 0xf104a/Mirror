@@ -2,6 +2,7 @@ package com.polar.mirror;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.WindowManager;
 
 import androidx.camera.core.Preview;
@@ -14,6 +15,7 @@ public class LowLightController {
     private final Activity mActivity;
     private float lastBrightness = 1;
     public boolean isLowLightModeEnabled = false;
+    private static final String TAG = "LowLightController";
 
 
     LowLightController(Activity activity, Preview cameraPreview){
@@ -30,6 +32,7 @@ public class LowLightController {
 
     private void disableLowLightMode(){
         WindowManager.LayoutParams layout = mActivity.getWindow().getAttributes();
+        Log.d(TAG, "Setting brightness " + lastBrightness);
         layout.screenBrightness = lastBrightness;
         mActivity.getWindow().setAttributes(layout);
     }
@@ -40,9 +43,9 @@ public class LowLightController {
      */
     public boolean toggleLowLightMode(){
         if(isLowLightModeEnabled){
-            enableLowLightMode();
-        }else{
             disableLowLightMode();
+        }else{
+            enableLowLightMode();
         }
         isLowLightModeEnabled = !isLowLightModeEnabled;
         return isLowLightModeEnabled;
