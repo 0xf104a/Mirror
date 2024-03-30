@@ -1,0 +1,2 @@
+* Dodano tryb ciemności
+* Naprawiono metadany
