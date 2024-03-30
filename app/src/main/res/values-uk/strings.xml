@@ -7,4 +7,5 @@
     <string name="can_not_start_camera">Не вдалося отримати доступ до камери</string>
     <string name="no_camera_permissions">Доступ до камери не надано. Скористуйтесь застосунком Налаштування, аби надати доступ вручну</string>
     <string name="low_light">Режим пітьми</string>
+    <string name="low_light_mode_overlay">Оверлей режим пітьми</string>
 </resources>

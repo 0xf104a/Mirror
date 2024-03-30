@@ -57,10 +57,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Get low-light FAB
         FloatingActionButton lowLightModeButton = findViewById(R.id.low_light_button);
 
+        //Get low-light overlay
+        ImageView lowLightOverlay = findViewById(R.id.low_light_overlay_view);
+
         //Start camera
         try {
             startCamera();
-            mLowLightController = new LowLightController(this, lowLightModeButton);
+            mLowLightController = new LowLightController(this, lowLightModeButton,
+                    lowLightOverlay);
         } catch (ExecutionException | InterruptedException e) {
             final String toastText = getString(R.string.can_not_start_camera);
             Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();

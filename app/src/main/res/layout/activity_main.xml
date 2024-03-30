@@ -20,6 +20,16 @@
         android:scaleType="centerCrop"
         android:contentDescription="@string/stop_view_desc" />
 
+    <ImageView
+        android:id="@+id/low_light_overlay_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/white"
+        android:alpha="0.3"
+        android:visibility="gone"
+        android:contentDescription="@string/low_light_mode_overlay" />
+
     <View
         android:id="@+id/overlay_view"
         android:layout_width="match_parent"
@@ -29,6 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <include layout="@layout/action_panel" />
 
