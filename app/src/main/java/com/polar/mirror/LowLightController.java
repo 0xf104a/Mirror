@@ -37,6 +37,8 @@ public class LowLightController {
         lastBrightness = layout.screenBrightness;
         layout.screenBrightness = 1F;
         mActivity.getWindow().setAttributes(layout);
+        //Set image on FAB
+        mLowLightModeButton.setImageResource(R.drawable.flashlight_off);
     }
 
     private void disableLowLightMode(){
@@ -44,6 +46,8 @@ public class LowLightController {
         Log.d(TAG, "Setting brightness " + lastBrightness);
         layout.screenBrightness = lastBrightness;
         mActivity.getWindow().setAttributes(layout);
+        //Set image on FAB
+        mLowLightModeButton.setImageResource(R.drawable.flashlight_on);
     }
 
     /**

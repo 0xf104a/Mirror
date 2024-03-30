@@ -54,10 +54,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFreezeController = new FreezeController(this, freezeButton, mCameraView,
                 freezeView);
 
+        //Get low-light FAB
+        FloatingActionButton lowLightModeButton = findViewById(R.id.low_light_button);
+
         //Start camera
         try {
             startCamera();
-            mLowLightController = new LowLightController(this);
+            mLowLightController = new LowLightController(this, lowLightModeButton);
         } catch (ExecutionException | InterruptedException e) {
             final String toastText = getString(R.string.can_not_start_camera);
             Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();

@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/low_light"
-                android:src="@android:drawable/ic_menu_view" />
+                android:src="@drawable/flashlight_on" />
 
             <TextView
                 android:layout_width="match_parent"
