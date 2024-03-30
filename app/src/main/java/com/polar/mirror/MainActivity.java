@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Start camera
         try {
             startCamera();
-            mLowLightController = new LowLightController(this, mPreview);
+            mLowLightController = new LowLightController(this);
         } catch (ExecutionException | InterruptedException e) {
             final String toastText = getString(R.string.can_not_start_camera);
             Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();

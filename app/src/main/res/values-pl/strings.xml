@@ -7,4 +7,5 @@
     <string name="tap_to_show_actions">Kliknij gdziekolwiek, aby wyświetlić menu akcji</string>
     <string name="can_not_start_camera">Brak dostępu do kamery</string>
     <string name="no_camera_permissions">Dostęp do kamery nie został przyznany. Użyj aplikacji Ustawienia, aby pryznać dostęp</string>
+    <string name="low_light">Tryb ciemonści</string>
 </resources>
