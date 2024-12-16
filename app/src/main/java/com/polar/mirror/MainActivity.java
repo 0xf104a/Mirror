@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.MirrorMode;
 import androidx.camera.core.Preview;
 import androidx.camera.view.PreviewView;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final static String TAG = "MainActivity";
     private Preview mPreview = null;
     private static final int CAMERA_PERMISSION_CODE = 858;
+    ProcessCameraProvider cameraProvider = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,12 +127,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FloatingActionButton exitButton = findViewById(R.id.exit_button);
         FloatingActionButton freezeButton = findViewById(R.id.freeze_button);
         FloatingActionButton lowLightButton = findViewById(R.id.low_light_button);
+        FloatingActionButton cameraChooserButton = findViewById(R.id.camera_chooser_button);
         exitButton.setClickable(true);
         exitButton.setOnClickListener(this);
         freezeButton.setClickable(true);
         freezeButton.setOnClickListener(this);
         lowLightButton.setClickable(true);
         lowLightButton.setOnClickListener(this);
+        cameraChooserButton.setClickable(true);
+        cameraChooserButton.setOnClickListener(this);
     }
 
     /**
@@ -147,13 +152,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @throws ExecutionException in case of task errors
      * @throws InterruptedException in case of thread interruption
      */
+    @androidx.annotation.OptIn(markerClass = androidx.camera.core.ExperimentalMirrorMode.class)
     private void startCamera() throws ExecutionException, InterruptedException {
-        mPreview = new Preview.Builder().build();
+        mPreview = new Preview.Builder()
+                .setMirrorMode(MirrorMode.MIRROR_MODE_ON)
+                .build();
         mPreview.setSurfaceProvider(mCameraView.getSurfaceProvider());
-        ProcessCameraProvider cameraProvider = ProcessCameraProvider.getInstance(this).get();
+        cameraProvider = ProcessCameraProvider.getInstance(this).get();
         try {
             CameraSelector cameraSelector = new CameraSelector.Builder()
-                    .requireLensFacing(CameraSelector.LENS_FACING_FRONT)
+                    .requireLensFacing(mFreezeController.getSelectedCamera())
                     .build();
             cameraProvider.unbindAll();
             cameraProvider.bindToLifecycle(this, cameraSelector, mPreview);
@@ -178,6 +186,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mLowLightController.toggleLowLightMode();
     }
 
+    /**
+     * Toggles front/rear camera
+     */
+    private void toggleSelectedCamera(){
+        mFreezeController.toggleSelectedCamera();
+        CameraSelector cameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(mFreezeController.getSelectedCamera())
+                .build();
+        cameraProvider.unbindAll();
+        cameraProvider.bindToLifecycle(this, cameraSelector, mPreview);
+        mFreezeController.onCameraInitialized(cameraProvider, this);
+    }
+
     @Override
     public void onClick(@NonNull View v) {
         int viewId = v.getId();
@@ -188,6 +209,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             toggleCameraFreeze();
         } else if(viewId == R.id.low_light_button){
             toggleLowLightMode();
+        } else if(viewId == R.id.camera_chooser_button){
+            toggleSelectedCamera();
         } else {
             Log.w(TAG, "Unknown id of view: " + viewId);
         }

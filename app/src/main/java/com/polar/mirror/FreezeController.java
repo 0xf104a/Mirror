@@ -38,6 +38,7 @@ public class FreezeController {
     private final Context mContext;
     private boolean mCameraFrozen = false;
     private final FloatingActionButton mFreezeButton;
+    private int selectedCamera = CameraSelector.LENS_FACING_FRONT;
 
     FreezeController(Context context, FloatingActionButton freezeButton, PreviewView cameraView,
                      ImageView freezeView){
@@ -57,14 +58,14 @@ public class FreezeController {
      */
     public void onCameraInitialized(@NonNull ProcessCameraProvider provider, LifecycleOwner lcOwner){
         CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_FRONT)
+                .requireLensFacing(selectedCamera)
                 .build();
         provider.bindToLifecycle(lcOwner, cameraSelector, mImageCapture);
         Log.d(TAG, "completed onCameraInitialized");
     }
 
     private int getRotationAngleFromOrientation(int orientation){
-        int angle = 270;
+        int angle;
         switch (orientation) {
             case Surface.ROTATION_90:
                 angle = 0;
@@ -76,7 +77,11 @@ public class FreezeController {
                 angle = 180;
                 break;
             default:
+                angle = 270;
                 break;
+        }
+        if (getSelectedCamera() == CameraSelector.LENS_FACING_BACK) {
+            angle = (angle + 180) % 360;
         }
         return angle;
     }
@@ -151,4 +156,17 @@ public class FreezeController {
             mCameraFrozen = true;
         }
     }
+
+    public void toggleSelectedCamera() {
+        if (selectedCamera == CameraSelector.LENS_FACING_FRONT) {
+            selectedCamera = CameraSelector.LENS_FACING_BACK;
+        } else {
+            selectedCamera = CameraSelector.LENS_FACING_FRONT;
+        }
+    }
+
+    public int getSelectedCamera() {
+        return selectedCamera;
+    }
+
 }
