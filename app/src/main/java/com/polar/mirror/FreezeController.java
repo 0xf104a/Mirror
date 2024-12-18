@@ -66,22 +66,20 @@ public class FreezeController {
 
     private int getRotationAngleFromOrientation(int orientation){
         int angle;
+        boolean rearCamera = getSelectedCamera() == CameraSelector.LENS_FACING_BACK;
         switch (orientation) {
             case Surface.ROTATION_90:
                 angle = 0;
                 break;
             case Surface.ROTATION_180:
-                angle = 90;
+                angle = rearCamera ? 270 : 90;
                 break;
             case Surface.ROTATION_270:
                 angle = 180;
                 break;
             default:
-                angle = 270;
+                angle = rearCamera ? 90 : 270;
                 break;
-        }
-        if (getSelectedCamera() == CameraSelector.LENS_FACING_BACK) {
-            angle = (angle + 180) % 360;
         }
         return angle;
     }
