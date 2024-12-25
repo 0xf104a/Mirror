@@ -8,4 +8,5 @@
     <string name="no_camera_permissions">Camera permissions was not granted. Use Settings app to grant it.</string>
     <string name="low_light">Dark mode</string>
     <string name="low_light_mode_overlay">Low light mode overlay</string>
+    <string name="flip_camera">Flip</string>
 </resources>

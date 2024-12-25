@@ -9,4 +9,5 @@
     <string name="no_camera_permissions">Dostęp do kamery nie został przyznany. Użyj aplikacji Ustawienia, aby pryznać dostęp</string>
     <string name="low_light">Tryb ciemności</string>
     <string name="low_light_mode_overlay">Overlay trybu ciemności</string>
+    <string name="flip_camera">Obrót</string>
 </resources>
