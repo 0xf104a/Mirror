@@ -6,9 +6,7 @@
 
     <!-- Declare permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.BIND_QUICK_SETTINGS_TILE" />
 
-    <!-- Declare the TileService -->
 
 <application
         android:allowBackup="true"
