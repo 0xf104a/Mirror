@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'com.polar.mirror'
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.polar.mirror"
         minSdk 26
-        targetSdk 34
+        targetSdk 36
         versionCode 4
         versionName "1.2.0"
 

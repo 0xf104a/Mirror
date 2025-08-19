@@ -11,12 +11,14 @@ import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 import android.Manifest;
@@ -73,6 +75,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+        // Set flags we can show this activity over lockscreen
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
     }
 
     @Override
@@ -153,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @throws ExecutionException in case of task errors
      * @throws InterruptedException in case of thread interruption
      */
+    @SuppressLint("RestrictedApi")
     @androidx.annotation.OptIn(markerClass = androidx.camera.core.ExperimentalMirrorMode.class)
     private void startCamera() throws ExecutionException, InterruptedException {
         mCameraView.setImplementationMode(PreviewView.ImplementationMode.COMPATIBLE);

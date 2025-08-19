@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/Andrewerr/Mirror/blob/main/fastlane/images/icon.png" height="200">
+<img src="https://github.com/0xf104a/Mirror/blob/main/fastlane/images/icon.png" height="200">
 
 # Mirror
 
