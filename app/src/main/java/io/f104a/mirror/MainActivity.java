@@ -1,4 +1,4 @@
-package com.polar.mirror;
+package io.f104a.mirror;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -24,6 +24,10 @@ import android.widget.Toast;
 import android.Manifest;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import io.f104a.mirror.controllers.ActionPanelController;
+import io.f104a.mirror.controllers.CameraStreamController;
+import io.f104a.mirror.controllers.FreezeController;
+import io.f104a.mirror.controllers.LowLightController;
 
 import java.util.concurrent.ExecutionException;
 
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Preview mPreview = null;
     private static final int CAMERA_PERMISSION_CODE = 858;
     private ProcessCameraProvider mCameraProvider = null;
+    private CameraStreamController mCameraStreamController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Start camera
         try {
-            startCamera();
+            mCameraStreamController.startCamera();
             mLowLightController = new LowLightController(this, lowLightModeButton,
                     lowLightOverlay);
         } catch (ExecutionException | InterruptedException e) {
@@ -156,32 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         decorView.setSystemUiVisibility(uiOptions);
     }
 
-    /**
-     * Initializes camera stream
-     * @throws ExecutionException in case of task errors
-     * @throws InterruptedException in case of thread interruption
-     */
-    @SuppressLint("RestrictedApi")
-    @androidx.annotation.OptIn(markerClass = androidx.camera.core.ExperimentalMirrorMode.class)
-    private void startCamera() throws ExecutionException, InterruptedException {
-        mCameraView.setImplementationMode(PreviewView.ImplementationMode.COMPATIBLE);
-        mCameraView.addOnLayoutChangeListener(this::onLayoutChange);
-        mPreview = new Preview.Builder()
-                .setMirrorMode(MirrorMode.MIRROR_MODE_ON)
-                .build();
-        mPreview.setSurfaceProvider(mCameraView.getSurfaceProvider());
-        mCameraProvider = ProcessCameraProvider.getInstance(this).get();
-        try {
-            CameraSelector cameraSelector = new CameraSelector.Builder()
-                    .requireLensFacing(mFreezeController.getSelectedCamera())
-                    .build();
-            mCameraProvider.unbindAll();
-            mCameraProvider.bindToLifecycle(this, cameraSelector, mPreview);
-            mFreezeController.onCameraInitialized(mCameraProvider, this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     /**
      * Toggles camera freeze mode
@@ -251,30 +231,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "User denied camera permission");
                 Toast.makeText(this, toastText, Toast.LENGTH_LONG).show();
             }
-        }
-    }
-
-    private void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
-        int orientation = mCameraView.getDisplay().getRotation();
-        if (mFreezeController.getSelectedCamera() == CameraSelector.LENS_FACING_BACK) {
-            int o;
-            switch (orientation) {
-                case Surface.ROTATION_0:
-                    o = Surface.ROTATION_0;
-                    break;
-                case Surface.ROTATION_90:
-                    o = Surface.ROTATION_270;
-                    break;
-                case Surface.ROTATION_180:
-                    o = Surface.ROTATION_180;
-                    break;
-                default: // Surface.ROTATION_270:
-                    o = Surface.ROTATION_90;
-                    break;
-            }
-            mPreview.setTargetRotation(o);
-        } else {
-            mPreview.setTargetRotation(orientation);
         }
     }
 }

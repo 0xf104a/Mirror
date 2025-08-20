@@ -1,4 +1,4 @@
-package com.polar.mirror;
+package io.f104a.mirror.controllers;
 
 import static androidx.core.content.ContextCompat.getMainExecutor;
 
@@ -24,6 +24,7 @@ import androidx.camera.view.PreviewView;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import io.f104a.mirror.Utils;
 
 import java.nio.ByteBuffer;
 
@@ -40,8 +41,8 @@ public class FreezeController {
     private final FloatingActionButton mFreezeButton;
     private int selectedCamera = CameraSelector.LENS_FACING_FRONT;
 
-    FreezeController(Context context, FloatingActionButton freezeButton, PreviewView cameraView,
-                     ImageView freezeView){
+    public FreezeController(Context context, FloatingActionButton freezeButton, PreviewView cameraView,
+                            ImageView freezeView){
         mCameraView = cameraView;
         mFreezeView = freezeView;
         mContext = context;

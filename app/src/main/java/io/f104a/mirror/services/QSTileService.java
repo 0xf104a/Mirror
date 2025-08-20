@@ -1,11 +1,10 @@
-package com.polar.mirror.services;
+package io.f104a.mirror.services;
 
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
-import com.polar.mirror.MainActivity;
+import io.f104a.mirror.MainActivity;
 
 /**
  * Quick settings tile, intended to call app when on lock screen

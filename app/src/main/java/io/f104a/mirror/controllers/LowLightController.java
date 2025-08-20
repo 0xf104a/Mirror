@@ -1,21 +1,13 @@
-package com.polar.mirror;
+package io.f104a.mirror.controllers;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.LightingColorFilter;
-import android.graphics.Paint;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import androidx.camera.core.Preview;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import io.f104a.mirror.R;
 
 /**
  * Implements low-light mode
@@ -30,8 +22,8 @@ public class LowLightController {
     private static final int WHITENING_VALUE = 128;
 
 
-    LowLightController(Activity activity, FloatingActionButton lowLightModeButton,
-                       ImageView lowLightOverlay){
+    public LowLightController(Activity activity, FloatingActionButton lowLightModeButton,
+                              ImageView lowLightOverlay){
         mActivity = activity;
         mLowLightModeButton = lowLightModeButton;
         mLowLightOverlay = lowLightOverlay;

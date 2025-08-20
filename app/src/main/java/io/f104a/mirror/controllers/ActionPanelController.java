@@ -1,4 +1,4 @@
-package com.polar.mirror;
+package io.f104a.mirror.controllers;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
+import io.f104a.mirror.R;
 
 class ActionPanelControllerData implements Parcelable{
     public final Boolean isPanelVisible;
@@ -199,7 +201,7 @@ public class ActionPanelController implements View.OnClickListener {
                 new ActionPanelControllerData(mPanelVisible, isFirstTimeHide));
     }
 
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         ActionPanelControllerData controllerData =
                 savedInstanceState.getParcelable(ActionPanelControllerData.PARCELABLE_NAME);
         if(controllerData == null){
